@@ -1,5 +1,11 @@
 *.class
 
+*.classpath
+*.gitignore
+*.project
+*.prefs
+*.prefs
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
