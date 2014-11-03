@@ -2,9 +2,9 @@ package com.tripadviator.dao.mongo.product;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.tripadviator.serivce.product.response.Product;
+import com.tripadviator.serivce.product.response.ProductResponse;
 
-public interface ProductRepository extends MongoRepository<Product, String>
+public interface ProductRepository extends MongoRepository<ProductResponse, String>
 {
 	/**
 	 * Get product by its code
@@ -12,5 +12,5 @@ public interface ProductRepository extends MongoRepository<Product, String>
 	 * @param code
 	 * @return
 	 */
-	public Product getProductByCode(String code);
+	public ProductResponse getProductByCode(String code);
 }

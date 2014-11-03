@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ImportResource;
 import com.tripadviator.dao.mongo.product.ProductRepository;
 import com.tripadviator.serivce.product.ProductImportService;
 import com.tripadviator.serivce.product.request.ProductRequest;
-import com.tripadviator.serivce.product.response.Product;
+import com.tripadviator.serivce.product.response.ProductResponse;
 
 @EnableAutoConfiguration
 @ImportResource(value = "classpath:tripadviator-service.xml")
@@ -45,7 +45,7 @@ public class MainApp implements CommandLineRunner
 		request.setSubCatId(0);
 		request.setDealsOnly(false);
 		
-		List<Product> productList = productImportService.getProductList(url , request);
+		List<ProductResponse> productList = productImportService.getProductList(url , request);
 		System.out.println(productList);
 	}
 

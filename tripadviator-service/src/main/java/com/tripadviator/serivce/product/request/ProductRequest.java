@@ -1,7 +1,14 @@
 package com.tripadviator.serivce.product.request;
 
-public class ProductRequest 
+import com.tripadviator.serivce.base.AbstractRequest;
+
+public class ProductRequest extends AbstractRequest
 {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 7317703613504640375L;
+
 	private String startDate;
 
 	private String endDate;

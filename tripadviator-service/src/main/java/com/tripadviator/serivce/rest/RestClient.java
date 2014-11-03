@@ -1,15 +1,15 @@
 package com.tripadviator.serivce.rest;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.tripadviator.serivce.base.AbstractResponse;
 import com.tripadviator.serivce.product.request.ProductRequest;
-import com.tripadviator.serivce.product.response.Product;
 
 @Service("restClient")
 public class RestClient 
@@ -17,15 +17,30 @@ public class RestClient
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	@SuppressWarnings("unchecked")
-	public List<Product> getProductList(String url, ProductRequest request)
+	/**
+	 * Use HTTP POST method to fetch URL resources
+	 * 
+	 * @param url
+	 * @param request
+	 * @return
+	 */
+	public AbstractResponse getListByPost(String url, ProductRequest request)
 	{
-		return (List<Product>) restTemplate.postForEntity(url, request, List.class, buildApiKey());
+		ResponseEntity<AbstractResponse> response = restTemplate.postForEntity(url, request, AbstractResponse.class, buildApiKey());
+		return response.getBody();
 	}
 	
-	public <T> T getForObject(String url)
+	/**
+	 * Use HTTP GET method to fetch URL resources
+	 * 
+	 * @param url
+	 * @param request
+	 * @return
+	 */
+	public AbstractResponse getObjectByGet(String url, ProductRequest request)
 	{
-		return null;
+		ResponseEntity<AbstractResponse> response = restTemplate.getForEntity(url, AbstractResponse.class, request);
+		return response.getBody();
 	}
 	
 	private Map<String, String> buildApiKey()
