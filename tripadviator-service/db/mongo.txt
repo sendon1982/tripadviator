@@ -42,3 +42,12 @@ seo_info
 customer_support
 
 ------------------------------------------------------------
+
+'1', 'Middle East &amp; Africa', 'CONTINENT', '2013-12-02 15:20:21', NULL, NULL, 'Y', 'LIVE', NULL, NULL, NULL, 'Middle East &amp; Africa', NULL
+'2', 'Asia', 'CONTINENT', '2014-11-03 09:52:42', NULL, NULL, 'Y', 'LIVE', NULL, NULL, NULL, 'Asia', NULL
+'3', 'Australia &amp; the Pacific', 'CONTINENT', '2014-09-25 11:16:27', NULL, NULL, 'Y', 'LIVE', NULL, NULL, NULL, 'Australia &amp; the Pacific', NULL
+'4', 'Caribbean', 'CONTINENT', '2014-09-25 10:58:55', NULL, NULL, 'Y', 'LIVE', NULL, NULL, NULL, 'Caribbean', NULL
+'6', 'Europe', 'CONTINENT', '2014-10-01 14:32:12', NULL, NULL, 'Y', 'LIVE', NULL, NULL, NULL, 'Europe', NULL
+'8', 'North America', 'CONTINENT', '2014-11-11 06:27:05', NULL, NULL, 'Y', 'LIVE', NULL, NULL, NULL, 'North America', NULL
+'9', 'Central &amp; South America', 'CONTINENT', '2014-07-07 14:03:47', NULL, NULL, 'Y', 'LIVE', NULL, NULL, NULL, 'Central &amp; South America', NULL
+
