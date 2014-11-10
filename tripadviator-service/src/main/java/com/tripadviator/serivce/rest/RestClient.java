@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.tripadviator.serivce.base.AbstractResponse;
 import com.tripadviator.serivce.product.request.ProductRequest;
 import com.tripadviator.serivce.product.response.ProductResponse;
 
