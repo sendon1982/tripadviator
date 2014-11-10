@@ -16,16 +16,16 @@
 		<!-- <constructor-arg ref="httpClientParams"/> -->
 	</bean>
 
-	<bean id="httpClientFactory" class="org.springframework.http.client.CommonsClientHttpRequestFactory">
-		<constructor-arg ref="httpClient" />
+	<bean id="requestFactory" class="org.springframework.http.client.SimpleClientHttpRequestFactory"> 
+	    
 	</bean>
 
 	<bean id="restTemplate" name="restTemplate" class="org.springframework.web.client.RestTemplate" autowire-candidate="true">
-		<constructor-arg ref="httpClientFactory" />
+		<property name="requestFactory" ref="requestFactory"></property>
 
 		<property name="messageConverters">
 			<list>
-				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 				<bean class="org.springframework.http.converter.FormHttpMessageConverter" />
 				<bean class="org.springframework.http.converter.StringHttpMessageConverter" />
 			</list>

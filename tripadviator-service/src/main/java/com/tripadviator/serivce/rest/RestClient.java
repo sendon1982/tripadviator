@@ -1,8 +1,5 @@
 package com.tripadviator.serivce.rest;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -10,10 +7,13 @@ import org.springframework.web.client.RestTemplate;
 
 import com.tripadviator.serivce.base.AbstractResponse;
 import com.tripadviator.serivce.product.request.ProductRequest;
+import com.tripadviator.serivce.product.response.ProductResponse;
 
 @Service("restClient")
 public class RestClient 
 {
+	private static final String API_KEY = "apiKey=795694069217287";
+	
 	@Autowired
 	private RestTemplate restTemplate;
 	
@@ -24,30 +24,34 @@ public class RestClient
 	 * @param request
 	 * @return
 	 */
-	public AbstractResponse getListByPost(String url, ProductRequest request)
+	public ProductResponse getListByPost(String url, ProductRequest request)
 	{
-		ResponseEntity<AbstractResponse> response = restTemplate.postForEntity(url, request, AbstractResponse.class, buildApiKey());
+		ResponseEntity<ProductResponse> response = restTemplate.postForEntity(createURLWithApiKey(url), request, ProductResponse.class);
 		return response.getBody();
 	}
 	
 	/**
-	 * Use HTTP GET method to fetch URL resources
+	 * Append ApiKey as a query string for the requested URL
 	 * 
 	 * @param url
-	 * @param request
 	 * @return
 	 */
-	public AbstractResponse getObjectByGet(String url, ProductRequest request)
+	private String createURLWithApiKey(String url)
 	{
-		ResponseEntity<AbstractResponse> response = restTemplate.getForEntity(url, AbstractResponse.class, request);
-		return response.getBody();
-	}
-	
-	private Map<String, String> buildApiKey()
-	{
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("apiKey", "795694069217287");
+		StringBuilder sb = new StringBuilder();
+		sb.append(url);
 		
-		return map;
+		if(url.indexOf("?") < 0)
+		{
+			sb.append("?");
+			sb.append(API_KEY);
+		}
+		else
+		{
+			sb.append("&");
+			sb.append(API_KEY);
+		}
+		
+		return sb.toString();
 	}
 }

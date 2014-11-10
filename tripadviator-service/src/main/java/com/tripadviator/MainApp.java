@@ -45,8 +45,8 @@ public class MainApp implements CommandLineRunner
 		request.setSubCatId(0);
 		request.setDealsOnly(false);
 		
-		List<ProductResponse> productList = productImportService.getProductList(url , request);
-		System.out.println(productList);
+		ProductResponse productList = productImportService.getProductList(url , request);
+		System.out.println(productList.getData());
 	}
 
 }

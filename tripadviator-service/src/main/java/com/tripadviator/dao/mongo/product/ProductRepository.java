@@ -12,5 +12,5 @@ public interface ProductRepository extends MongoRepository<ProductResponse, Stri
 	 * @param code
 	 * @return
 	 */
-	public ProductResponse getProductByCode(String code);
+//	public ProductResponse getProductByCode(String code);
 }
