@@ -3,6 +3,9 @@ package com.tripadviator.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "product")
 public class Product implements Serializable
 {
 	/**

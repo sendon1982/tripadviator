@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tripadviator.domain.Product;
 import com.tripadviator.serivce.product.request.ProductRequest;
 import com.tripadviator.serivce.product.response.ProductResponse;
 import com.tripadviator.serivce.rest.RestClient;
@@ -23,8 +24,8 @@ public class ProductImportService
 	@Autowired
 	private RestClient restClient;
 	
-	public ProductResponse getProductList(String url, ProductRequest request)
+	public List<Product> getProductList(String url, ProductRequest request)
 	{
-		return (ProductResponse) restClient.getListByPost(url, request);
+		return (List<Product>) restClient.getListByPost(url, request).getData();
 	}
 }
