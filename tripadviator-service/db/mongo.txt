@@ -15,6 +15,8 @@ user_content
 
 product
 
+product_detail (all detail information)
+
 product_review
 
 product_photo
@@ -42,6 +44,12 @@ seo_info
 customer_support
 
 ------------------------------------------------------------
+
+mongoimport --db tripadviator --collection product --file D:/product.json
+
+
+mongoexport --db tripadviator --collection product --out D:/product.json
+
 
 '1', 'Middle East &amp; Africa', 'CONTINENT', '2013-12-02 15:20:21', NULL, NULL, 'Y', 'LIVE', NULL, NULL, NULL, 'Middle East &amp; Africa', NULL
 '2', 'Asia', 'CONTINENT', '2014-11-03 09:52:42', NULL, NULL, 'Y', 'LIVE', NULL, NULL, NULL, 'Asia', NULL
