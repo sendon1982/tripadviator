@@ -1,11 +1,16 @@
 package com.tripadviator.serivce.rest;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.tripadviator.serivce.product.request.ProductDetailRequest;
 import com.tripadviator.serivce.product.request.ProductRequest;
+import com.tripadviator.serivce.product.response.ProductDetailResponse;
 import com.tripadviator.serivce.product.response.ProductResponse;
 
 @Service("restClient")
@@ -30,6 +35,25 @@ public class RestClient
 	}
 	
 	/**
+	 * Use HTTP GET method to fetch URL resources, fetching ProductDetail by its code
+	 * 
+	 * @param url
+	 * @param request
+	 * @return
+	 */
+	public ProductDetailResponse getProductByCode(String url, ProductDetailRequest request)
+	{
+		Map<String, String> requestMap = new LinkedHashMap<String, String>();
+		requestMap.put("code", request.getCode());
+		requestMap.put("currencyCode", request.getCurrencyCode());
+		
+		String apiKeyURL = createURLWithApiKey(url);
+		
+		ResponseEntity<ProductDetailResponse> response = restTemplate.getForEntity(appendURLWithMap(apiKeyURL, requestMap), ProductDetailResponse.class);
+		return response.getBody();
+	}
+	
+	/**
 	 * Append ApiKey as a query string for the requested URL
 	 * 
 	 * @param url
@@ -49,6 +73,47 @@ public class RestClient
 		{
 			sb.append("&");
 			sb.append(API_KEY);
+		}
+		
+		return sb.toString();
+	}
+	
+	/**
+	 * Append ApiKey as a query string for the requested URL
+	 * 
+	 * @param url
+	 * @return
+	 */
+	private String appendURLWithMap(String url, Map<String, String> requestMap)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(url);
+		
+		if(url.indexOf("?") < 0)
+		{
+			sb.append("?");
+			
+			for (String key : requestMap.keySet()) 
+			{
+				sb.append(key);
+				sb.append("=");
+				sb.append(requestMap.get(key));
+				
+				sb.append("&");
+			}
+		}
+		else
+		{
+			sb.append("&");
+			
+			for (String key : requestMap.keySet()) 
+			{
+				sb.append(key);
+				sb.append("=");
+				sb.append(requestMap.get(key));
+				
+				sb.append("&");
+			}
 		}
 		
 		return sb.toString();

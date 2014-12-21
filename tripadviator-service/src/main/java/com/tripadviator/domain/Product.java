@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "product")
-public class Product implements Serializable
+public class Product extends AbstractProduct implements Serializable
 {
 	/**
 	 * serialVersionUID

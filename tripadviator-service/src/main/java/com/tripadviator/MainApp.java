@@ -1,10 +1,7 @@
 package com.tripadviator;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,7 +14,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.tripadviator.dao.mongo.product.ProductRepository;
 import com.tripadviator.dao.mongo.product.ProductRepositoryImpl;
 import com.tripadviator.domain.Product;
+import com.tripadviator.domain.ProductDetail;
 import com.tripadviator.serivce.product.ProductImportService;
+import com.tripadviator.serivce.product.ProductService;
+import com.tripadviator.serivce.product.request.ProductDetailRequest;
 import com.tripadviator.serivce.product.request.ProductRequest;
 
 @EnableAutoConfiguration
@@ -30,6 +30,9 @@ public class MainApp implements CommandLineRunner
 	
 	@Autowired
 	private ProductImportService productImportService;
+	
+	@Autowired
+	private ProductService productService;
 
 	public static void main(String[] args)
 	{
@@ -39,12 +42,63 @@ public class MainApp implements CommandLineRunner
 	@Override
 	public void run(String... args) throws Exception 
 	{
-		importProduct();
+		//importProduct();
+		//searchProductByCode();
+		importProductDetail();
+	}
+	
+	private void searchProductByCode()
+	{
+		System.out.println("Search product started ...");
+		
+		String url = "http://viatorapi.viator.com/service/product";
+		ProductDetailRequest request = new ProductDetailRequest();
+		request.setCode("2280AAHT");
+		request.setCurrencyCode("EUR");
+		
+		ProductDetail productDetail = productService.getProductDetailByCode(url, request);
+		
+		System.out.println(productDetail.getBookingEngineId());
+		
+		List<String> lest = productRepository.getAllProductCode();
+		System.out.println(lest.size());
+	}
+	
+	private void importProductDetail()
+	{
+		System.out.println("Import product detail started ...");
+		
+		String url = "http://viatorapi.viator.com/service/product";
+		ProductDetailRequest request = new ProductDetailRequest();
+		
+		List<String> allProductCode = productRepository.getAllProductCode();
+		for (String code : allProductCode) 
+		{
+			request.setCode(code);
+			request.setCurrencyCode("EUR");
+			
+			ProductDetail productDetail = null;
+			try
+			{
+				productDetail = productService.getProductDetailByCode(url, request);
+			}
+			catch(Exception e)
+			{
+				System.out.println("Failed for product : " + code);
+				System.err.println(e);
+				
+				productDetail = new ProductDetail();
+			}
+			
+			productRepository.save(productDetail);
+		}
+
+		System.out.println("Import product detail finished !");
 	}
 
 	private void importProduct()
 	{
-		System.out.println("import data started ...");
+		System.out.println("Import data started ...");
 		
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:tripadviator-service.xml");
 		ProductRepositoryImpl productRepositoryImpl = ctx.getBean(ProductRepositoryImpl.class);

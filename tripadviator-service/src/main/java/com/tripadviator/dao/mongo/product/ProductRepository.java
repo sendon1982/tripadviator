@@ -1,16 +1,26 @@
 package com.tripadviator.dao.mongo.product;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import java.util.List;
 
-import com.tripadviator.domain.Product;
+import com.tripadviator.domain.AbstractProduct;
+import com.tripadviator.domain.ProductDetail;
 
-public interface ProductRepository extends MongoRepository<Product, String>
+public interface ProductRepository
 {
+	public <S extends AbstractProduct> S save(S s);
+	
 	/**
 	 * Get product by its code
 	 *  
 	 * @param code
 	 * @return
 	 */
-//	public ProductResponse getProductByCode(String code);
+	public ProductDetail getProductByCode(String code);
+	
+	/**
+	 * Get all of the product code from DB
+	 * 
+	 * @return
+	 */
+	public List<String> getAllProductCode();
 }
