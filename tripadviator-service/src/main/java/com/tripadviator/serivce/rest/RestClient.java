@@ -3,11 +3,14 @@ package com.tripadviator.serivce.rest;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.tripadviator.serivce.base.AbstractRequest;
 import com.tripadviator.serivce.product.request.ProductDetailRequest;
 import com.tripadviator.serivce.product.request.ProductRequest;
 import com.tripadviator.serivce.product.response.ProductDetailResponse;
@@ -18,8 +21,38 @@ public class RestClient
 {
 	private static final String API_KEY = "apiKey=795694069217287";
 	
+	private static final Log log = LogFactory.getLog(RestClient.class);
+	
 	@Autowired
 	private RestTemplate restTemplate;
+	
+    public <T> T getRequest(String url, Class<T> clazz)
+    {
+    	if(log.isDebugEnabled())
+    	{
+    		log.debug(String.format("Request for URL [%s]", url));
+    		
+    		log.debug(String.format("Request JSON object: %s", url));
+    	}
+    	
+		ResponseEntity<T> response = restTemplate.getForEntity(url, clazz);
+		return response.getBody();
+    }
+	
+	
+    public <T> T postRequest(String url, AbstractRequest request, Class<T> clazz)
+    {
+    	if(log.isDebugEnabled())
+    	{
+    		log.debug(String.format("Request for URL [%s]", url));
+    		
+    		log.debug(String.format("Request JSON object: %s", url));
+    	}
+    	
+		ResponseEntity<T> response = restTemplate.postForEntity(createURLWithApiKey(url), request, clazz);
+		return response.getBody();
+    }
+    
 	
 	/**
 	 * Use HTTP POST method to fetch URL resources
