@@ -24,8 +24,16 @@ public class ProductImportService
 	@Autowired
 	private RestClient restClient;
 	
+	/**
+	 * Fetch product summary list based on destId, startDate, endDate and other parameters
+	 * 
+	 * @param url
+	 * @param request
+	 * @return
+	 */
 	public List<Product> getProductList(String url, ProductRequest request)
 	{
-		return (List<Product>) restClient.getListByPost(url, request).getData();
+		ProductResponse response = restClient.postRequest(url, request, ProductResponse.class);
+		return response.getData();
 	}
 }

@@ -44,7 +44,23 @@ public class MainApp implements CommandLineRunner
 	{
 		//importProduct();
 		//searchProductByCode();
-		importProductDetail();
+		//importProductDetail();
+
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:tripadviator-service.xml");
+		
+		String url = "http://viatorapi.viator.com/service/search/products";
+		
+		ProductRequest request = new ProductRequest();
+		
+		request.setCurrencyCode("USD");
+		request.setDestId(357);
+		request.setTopX("1-1");
+		request.setCatId(0);
+		request.setSubCatId(0);
+		request.setDealsOnly(false);
+			
+		List<Product> productList = productImportService.getProductList(url , request);
+		System.out.println(String.format("Loading for with total records [%s]", productList.size()));
 	}
 	
 	private void searchProductByCode()

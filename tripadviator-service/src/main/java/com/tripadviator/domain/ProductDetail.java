@@ -6,11 +6,13 @@ import java.util.Map;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tripadviator.domain.user.UserPhoto;
 import com.tripadviator.domain.user.UserReview;
 import com.tripadviator.domain.user.UserVideo;
 
 @Document(collection = "product_detail")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class ProductDetail extends AbstractProduct implements Serializable
 {
 	/**

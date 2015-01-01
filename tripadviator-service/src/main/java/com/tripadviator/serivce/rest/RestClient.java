@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.tripadviator.serivce.base.AbstractRequest;
 import com.tripadviator.serivce.product.request.ProductDetailRequest;
 import com.tripadviator.serivce.product.request.ProductRequest;
@@ -28,12 +30,8 @@ public class RestClient
 	
     public <T> T getRequest(String url, Class<T> clazz)
     {
-    	if(log.isDebugEnabled())
-    	{
-    		log.debug(String.format("Request for URL [%s]", url));
-    		
-    		log.debug(String.format("Request JSON object: %s", url));
-    	}
+   		log.debug(String.format("Request for URL [%s]", url));
+   		log.debug(String.format("Request JSON object: \n%s", url));
     	
 		ResponseEntity<T> response = restTemplate.getForEntity(url, clazz);
 		return response.getBody();
@@ -42,12 +40,8 @@ public class RestClient
 	
     public <T> T postRequest(String url, AbstractRequest request, Class<T> clazz)
     {
-    	if(log.isDebugEnabled())
-    	{
-    		log.debug(String.format("Request for URL [%s]", url));
-    		
-    		log.debug(String.format("Request JSON object: %s", url));
-    	}
+    	log.debug(String.format("Request for URL [%s]", url));
+    	log.debug(String.format("Request JSON object: \n%s", convertRequestToJson(request)));
     	
 		ResponseEntity<T> response = restTemplate.postForEntity(createURLWithApiKey(url), request, clazz);
 		return response.getBody();
@@ -150,5 +144,30 @@ public class RestClient
 		}
 		
 		return sb.toString();
+	}
+	
+	/**
+	 * Convert incoming request into JSON format string
+	 * 
+	 * @param request
+	 * @return
+	 */
+	private String convertRequestToJson(AbstractRequest request)
+	{
+		BaseObjectMapper mapper = new BaseObjectMapper();
+        ObjectWriter writer = mapper.writer().withDefaultPrettyPrinter();
+        
+        String json = null;
+        
+        try
+		{
+			json = writer.writeValueAsString(request);
+		} 
+        catch (JsonProcessingException e)
+		{
+			log.error(e);
+		}
+        
+        return json;
 	}
 }

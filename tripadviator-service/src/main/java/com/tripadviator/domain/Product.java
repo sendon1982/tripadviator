@@ -5,7 +5,10 @@ import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Document(collection = "product")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Product extends AbstractProduct implements Serializable
 {
 	/**
