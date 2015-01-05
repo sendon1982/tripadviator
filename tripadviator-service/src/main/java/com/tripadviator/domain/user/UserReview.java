@@ -2,12 +2,15 @@ package com.tripadviator.domain.user;
 
 import java.io.Serializable;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.tripadviator.domain.AbstractEntity;
 
+@Document(collection = "product_user_review")
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class UserReview implements Serializable
+public class UserReview extends AbstractEntity implements Serializable
 {
-
 	/**
 	 * serialVersionUID
 	 */
@@ -152,6 +155,5 @@ public class UserReview implements Serializable
 	public void setViatorNotes(String viatorNotes) {
 		this.viatorNotes = viatorNotes;
 	}
-	
-	
+
 }

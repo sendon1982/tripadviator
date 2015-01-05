@@ -1,6 +1,5 @@
 package com.tripadviator.serivce.rest;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -13,10 +12,6 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.tripadviator.serivce.base.AbstractRequest;
-import com.tripadviator.serivce.product.request.ProductDetailRequest;
-import com.tripadviator.serivce.product.request.ProductRequest;
-import com.tripadviator.serivce.product.response.ProductDetailResponse;
-import com.tripadviator.serivce.product.response.ProductResponse;
 
 @Service("restClient")
 public class RestClient 
@@ -28,16 +23,48 @@ public class RestClient
 	@Autowired
 	private RestTemplate restTemplate;
 	
+    /**
+     * HTTP Get generic method
+     * 
+     * @param url
+     * @param clazz
+     * @return
+     */
     public <T> T getRequest(String url, Class<T> clazz)
     {
    		log.debug(String.format("Request for URL [%s]", url));
-   		log.debug(String.format("Request JSON object: \n%s", url));
     	
 		ResponseEntity<T> response = restTemplate.getForEntity(url, clazz);
 		return response.getBody();
     }
+    
+    /**
+     * HTTP Get generic method
+     * 
+     * @param url
+     * @param clazz
+     * @return
+     */
+    public <T> T getRequest(String url, Map<String, String> requestMap, Class<T> clazz)
+    {
+    	String apiKeyURL = createURLWithApiKey(url);
+    	String finalURL = appendURLWithMap(apiKeyURL, requestMap);
+    	
+   		log.debug(String.format("Request for URL [%s]", finalURL));
+    	
+		ResponseEntity<T> response = restTemplate.getForEntity(finalURL, clazz);
+		return response.getBody();
+    }
 	
 	
+    /**
+     * HTTP Post generic method
+     * 
+     * @param url
+     * @param request
+     * @param clazz
+     * @return
+     */
     public <T> T postRequest(String url, AbstractRequest request, Class<T> clazz)
     {
     	log.debug(String.format("Request for URL [%s]", url));
@@ -46,39 +73,6 @@ public class RestClient
 		ResponseEntity<T> response = restTemplate.postForEntity(createURLWithApiKey(url), request, clazz);
 		return response.getBody();
     }
-    
-	
-	/**
-	 * Use HTTP POST method to fetch URL resources
-	 * 
-	 * @param url
-	 * @param request
-	 * @return
-	 */
-	public ProductResponse getListByPost(String url, ProductRequest request)
-	{
-		ResponseEntity<ProductResponse> response = restTemplate.postForEntity(createURLWithApiKey(url), request, ProductResponse.class);
-		return response.getBody();
-	}
-	
-	/**
-	 * Use HTTP GET method to fetch URL resources, fetching ProductDetail by its code
-	 * 
-	 * @param url
-	 * @param request
-	 * @return
-	 */
-	public ProductDetailResponse getProductByCode(String url, ProductDetailRequest request)
-	{
-		Map<String, String> requestMap = new LinkedHashMap<String, String>();
-		requestMap.put("code", request.getCode());
-		requestMap.put("currencyCode", request.getCurrencyCode());
-		
-		String apiKeyURL = createURLWithApiKey(url);
-		
-		ResponseEntity<ProductDetailResponse> response = restTemplate.getForEntity(appendURLWithMap(apiKeyURL, requestMap), ProductDetailResponse.class);
-		return response.getBody();
-	}
 	
 	/**
 	 * Append ApiKey as a query string for the requested URL

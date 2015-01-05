@@ -8,7 +8,6 @@ import com.tripadviator.domain.Product;
 
 public class ProductRepositoryImplTest 
 {
-
 	@Test
 	public void testInsert() 
 	{

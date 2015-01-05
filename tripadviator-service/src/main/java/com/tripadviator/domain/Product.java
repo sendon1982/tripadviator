@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Document(collection = "product")
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class Product extends AbstractProduct implements Serializable
+public class Product extends AbstractEntity implements Serializable
 {
 	/**
 	 * serialVersionUID

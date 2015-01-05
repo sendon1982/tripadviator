@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.tripadviator.domain.AbstractProduct;
+import com.tripadviator.domain.AbstractEntity;
 import com.tripadviator.domain.Product;
 import com.tripadviator.domain.ProductDetail;
 
@@ -95,7 +95,7 @@ public class ProductRepositoryImpl implements ProductRepository
 	}
 
 	
-	public <S extends AbstractProduct> S save(S s) 
+	public <S extends AbstractEntity> S save(S s) 
 	{
 		mongoTemplate.save(s);
 		return null;

@@ -13,7 +13,7 @@ import com.tripadviator.domain.user.UserVideo;
 
 @Document(collection = "product_detail")
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class ProductDetail extends AbstractProduct implements Serializable
+public class ProductDetail extends AbstractEntity implements Serializable
 {
 	/**
 	 * serialVersionUID

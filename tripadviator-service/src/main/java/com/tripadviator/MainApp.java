@@ -15,13 +15,15 @@ import com.tripadviator.dao.mongo.product.ProductRepository;
 import com.tripadviator.dao.mongo.product.ProductRepositoryImpl;
 import com.tripadviator.domain.Product;
 import com.tripadviator.domain.ProductDetail;
+import com.tripadviator.domain.user.UserReview;
 import com.tripadviator.serivce.product.ProductImportService;
-import com.tripadviator.serivce.product.ProductService;
 import com.tripadviator.serivce.product.request.ProductDetailRequest;
 import com.tripadviator.serivce.product.request.ProductRequest;
+import com.tripadviator.serivce.user.request.UserReviewRequest;
 
 @EnableAutoConfiguration
 @ImportResource(value = "classpath:tripadviator-service.xml")
+@SuppressWarnings("all")
 public class MainApp implements CommandLineRunner 
 {
 
@@ -30,9 +32,6 @@ public class MainApp implements CommandLineRunner
 	
 	@Autowired
 	private ProductImportService productImportService;
-	
-	@Autowired
-	private ProductService productService;
 
 	public static void main(String[] args)
 	{
@@ -44,23 +43,8 @@ public class MainApp implements CommandLineRunner
 	{
 		//importProduct();
 		//searchProductByCode();
-		//importProductDetail();
-
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:tripadviator-service.xml");
-		
-		String url = "http://viatorapi.viator.com/service/search/products";
-		
-		ProductRequest request = new ProductRequest();
-		
-		request.setCurrencyCode("USD");
-		request.setDestId(357);
-		request.setTopX("1-1");
-		request.setCatId(0);
-		request.setSubCatId(0);
-		request.setDealsOnly(false);
-			
-		List<Product> productList = productImportService.getProductList(url , request);
-		System.out.println(String.format("Loading for with total records [%s]", productList.size()));
+//		importProductDetail();
+		importProductReview();
 	}
 	
 	private void searchProductByCode()
@@ -72,7 +56,7 @@ public class MainApp implements CommandLineRunner
 		request.setCode("2280AAHT");
 		request.setCurrencyCode("EUR");
 		
-		ProductDetail productDetail = productService.getProductDetailByCode(url, request);
+		ProductDetail productDetail = productImportService.getProductDetailByCode(url, request);
 		
 		System.out.println(productDetail.getBookingEngineId());
 		
@@ -96,7 +80,7 @@ public class MainApp implements CommandLineRunner
 			ProductDetail productDetail = null;
 			try
 			{
-				productDetail = productService.getProductDetailByCode(url, request);
+				productDetail = productImportService.getProductDetailByCode(url, request);
 			}
 			catch(Exception e)
 			{
@@ -152,6 +136,60 @@ public class MainApp implements CommandLineRunner
 		}
 
 		System.out.println("import data completed");
+		
+	}
+	
+	private void importProductReview()
+	{
+		System.out.println("Import product review data started ...");
+		
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:tripadviator-service.xml");
+		ProductRepositoryImpl productRepositoryImpl = ctx.getBean(ProductRepositoryImpl.class);
+		
+		String url = "http://viatorapi.viator.com/service/product/reviews";
+		
+
+		List<String> allProductCode = productRepository.getAllProductCode();
+		for (String code : allProductCode) 
+		{
+			UserReviewRequest request = new UserReviewRequest();
+			request.setCode(code);
+			request.setTopX("1-50000");
+			request.setSortOrder("REVIEW_RATING_D");
+			
+			List<UserReview> reviews = null;
+			
+			try
+			{
+				reviews = productImportService.getProductUserReviewList(url, request);
+			}
+			catch(Exception e)
+			{
+				System.out.println("Failed for product : " + code);
+				System.out.println(e);
+				
+				// Try again
+				try
+				{
+					Thread.currentThread().sleep(2000);
+					reviews = productImportService.getProductUserReviewList(url, request);
+				}
+				catch(Exception ex)
+				{
+					System.out.println("Failed for product : " + code);
+					System.out.println(ex);
+					reviews = Collections.emptyList();
+				}
+				
+			}
+			
+			for (UserReview userReview : reviews) 
+			{
+				productRepositoryImpl.save(userReview);
+			}
+		}
+
+		System.out.println("import product review completed");
 		
 	}
 }

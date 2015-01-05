@@ -33,7 +33,6 @@
 	</bean>
 
 	<bean id="requestFactory" class="org.springframework.http.client.SimpleClientHttpRequestFactory"> 
-	    
 	</bean>
 
 	<bean id="restTemplate" name="restTemplate" class="org.springframework.web.client.RestTemplate" autowire-candidate="true">

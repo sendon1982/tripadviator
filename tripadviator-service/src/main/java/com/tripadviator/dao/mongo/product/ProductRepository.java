@@ -2,12 +2,12 @@ package com.tripadviator.dao.mongo.product;
 
 import java.util.List;
 
-import com.tripadviator.domain.AbstractProduct;
+import com.tripadviator.domain.AbstractEntity;
 import com.tripadviator.domain.ProductDetail;
 
 public interface ProductRepository
 {
-	public <S extends AbstractProduct> S save(S s);
+	public <S extends AbstractEntity> S save(S s);
 	
 	/**
 	 * Get product by its code
