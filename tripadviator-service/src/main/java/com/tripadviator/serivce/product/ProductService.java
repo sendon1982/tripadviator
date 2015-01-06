@@ -23,6 +23,7 @@ public class ProductService
 	
 	public ProductDetail getProductDetailByCode(String url, ProductDetailRequest request)
 	{
-		return restClient.getProductByCode(url, request).getData();
+//		return restClient.getProductByCode(url, request).getData();
+		return null;
 	}
 }
