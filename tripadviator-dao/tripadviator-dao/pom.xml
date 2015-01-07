@@ -4,7 +4,7 @@
 
 	<groupId>com.tripadviator</groupId>
 	<artifactId>tripadviator-dao</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>tripadviator-dao</name>
@@ -52,6 +52,12 @@
 	</build>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>com.tripadviator</groupId>
+			<artifactId>tripadviator-domain</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
 
 		<!-- spring -->
 		<dependency>

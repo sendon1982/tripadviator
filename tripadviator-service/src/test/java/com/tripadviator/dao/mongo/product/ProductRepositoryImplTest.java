@@ -12,7 +12,7 @@ public class ProductRepositoryImplTest
 	public void testInsert() 
 	{
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:tripadviator-service.xml");
-		ProductRepositoryImpl productRepositoryImpl = ctx.getBean(ProductRepositoryImpl.class);
+		ProductRepository productRepositoryImpl = ctx.getBean(ProductRepositoryImpl.class);
 		
 		Product product = new Product();
 		product.setCode("ABC");
