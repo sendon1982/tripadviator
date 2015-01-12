@@ -1,6 +1,7 @@
 package com.tripadviator.dao.mongo.product;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,6 +116,23 @@ public class ProductRepositoryImpl implements ProductRepository
 		
 		return mongoTemplate.findOne(query, ProductDetail.class);
 	}
+	
+	
+	/**
+	 * Get product by its code
+	 *  
+	 * @param code
+	 * @return
+	 */
+	@Override
+	public List<Product> getProductListByCodes(String[] codes)
+	{
+		Query query = new Query();
+		query.addCriteria(Criteria.where("code").in(Arrays.asList(codes)));
+		
+		return mongoTemplate.find(query, Product.class);
+	}
+	
 
 	/**
 	 * Get all of the product code from DB

@@ -2,7 +2,11 @@ package com.tripadviator.dao.mongo.product;
 
 import java.util.List;
 
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+
 import com.tripadviator.domain.AbstractEntity;
+import com.tripadviator.domain.Product;
 import com.tripadviator.domain.ProductDetail;
 
 public interface ProductRepository
@@ -16,6 +20,14 @@ public interface ProductRepository
 	 * @return
 	 */
 	public ProductDetail getProductByCode(String code);
+	
+	/**
+	 * Get product by its code
+	 *  
+	 * @param code
+	 * @return
+	 */
+	public List<Product> getProductListByCodes(String[] codes);
 	
 	/**
 	 * Get all of the product code from DB

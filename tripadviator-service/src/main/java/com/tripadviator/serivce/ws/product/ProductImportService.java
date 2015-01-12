@@ -1,4 +1,4 @@
-package com.tripadviator.serivce.product;
+package com.tripadviator.serivce.ws.product;
 
 import java.util.LinkedHashMap;
 import java.util.List;

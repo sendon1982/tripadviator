@@ -9,6 +9,7 @@ import com.tripadviator.domain.ProductDetail;
 import com.tripadviator.domain.user.UserReview;
 import com.tripadviator.serivce.product.request.ProductDetailRequest;
 import com.tripadviator.serivce.user.request.UserReviewRequest;
+import com.tripadviator.serivce.ws.product.ProductImportService;
 import com.tripadviator.service.base.BaseTestCase;
 
 public class ProductImportServiceTestCase extends BaseTestCase

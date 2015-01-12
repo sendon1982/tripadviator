@@ -16,10 +16,10 @@ import com.tripadviator.dao.mongo.product.ProductRepositoryImpl;
 import com.tripadviator.domain.Product;
 import com.tripadviator.domain.ProductDetail;
 import com.tripadviator.domain.user.UserReview;
-import com.tripadviator.serivce.product.ProductImportService;
 import com.tripadviator.serivce.product.request.ProductDetailRequest;
 import com.tripadviator.serivce.product.request.ProductRequest;
 import com.tripadviator.serivce.user.request.UserReviewRequest;
+import com.tripadviator.serivce.ws.product.ProductImportService;
 
 @EnableAutoConfiguration
 @ImportResource(value = "classpath:tripadviator-service.xml")

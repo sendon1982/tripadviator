@@ -1,15 +1,13 @@
 package com.tripadviator.serivce.product;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tripadviator.dao.mongo.product.ProductRepository;
+import com.tripadviator.domain.Product;
 import com.tripadviator.domain.ProductDetail;
-import com.tripadviator.serivce.product.request.ProductDetailRequest;
-import com.tripadviator.serivce.product.response.ProductDetailResponse;
-import com.tripadviator.serivce.rest.RestClient;
 
 /**
  * Import product information from Viator API service:
@@ -23,23 +21,28 @@ import com.tripadviator.serivce.rest.RestClient;
 public class ProductService 
 {
 	@Autowired
-	private RestClient restClient;
+	private ProductRepository productRepository;
 	
 	/**
 	 * Get product detail information by productCode
 	 * 
-	 * @param url
-	 * @param request
+	 * @param code
+	 * 
 	 * @return
 	 */
-	public ProductDetail getProductDetailByCode(String url, ProductDetailRequest request)
+	public ProductDetail getProductDetailByCode(String code)
 	{
-		Map<String, String> requestMap = new LinkedHashMap<String, String>();
-		requestMap.put("code", request.getCode());
-		requestMap.put("currencyCode", request.getCurrencyCode());
-		
-		ProductDetailResponse response = restClient.getRequest(url, requestMap, ProductDetailResponse.class);
-		
-		return response.getData();
+		return productRepository.getProductByCode(code);
+	}
+	
+	/**
+	 * Get product summary list based on product code array.
+	 * 
+	 * @param codes
+	 * @return
+	 */
+	public List<Product> getProductListByCodes(String[] codes)
+	{
+		return productRepository.getProductListByCodes(codes);
 	}
 }

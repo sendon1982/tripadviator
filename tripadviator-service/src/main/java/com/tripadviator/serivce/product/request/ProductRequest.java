@@ -24,6 +24,16 @@ public class ProductRequest extends AbstractRequest
 	private int subCatId;
 	
 	private boolean dealsOnly;
+	
+	private String[] codes;
+
+	public String[] getCodes() {
+		return codes;
+	}
+
+	public void setCodes(String[] codes) {
+		this.codes = codes;
+	}
 
 	public String getStartDate() {
 		return startDate;
