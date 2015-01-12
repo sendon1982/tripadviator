@@ -2,7 +2,7 @@ package com.tripadviator.domain.seo;
 
 import java.io.Serializable;
 
-public class SeoInfo implements Serializable
+public class SeoSummaryInfo implements Serializable
 {
 	/**
 	 * serialVersionUID
@@ -41,7 +41,7 @@ public class SeoInfo implements Serializable
 	
 	private boolean editorsPick;
 	
-	private Keywords keywords;
+	private Keyword keywords;
 	
 	private Integer primaryDestinationId;
 	
@@ -235,12 +235,12 @@ public class SeoInfo implements Serializable
 		this.editorsPick = editorsPick;
 	}
 
-	public Keywords getKeywords()
+	public Keyword getKeywords()
 	{
 		return keywords;
 	}
 
-	public void setKeywords(Keywords keywords)
+	public void setKeywords(Keyword keywords)
 	{
 		this.keywords = keywords;
 	}

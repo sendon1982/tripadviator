@@ -2,7 +2,7 @@ package com.tripadviator.domain.seo;
 
 import java.io.Serializable;
 
-public class Keywords implements Serializable
+public class Keyword implements Serializable
 {
 
 	/**
