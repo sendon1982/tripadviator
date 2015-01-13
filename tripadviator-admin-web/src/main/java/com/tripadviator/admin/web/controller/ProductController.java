@@ -1,45 +1,27 @@
 package com.tripadviator.admin.web.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.tripadviator.domain.Product;
-import com.tripadviator.domain.ProductDetail;
-import com.tripadviator.serivce.product.ProductService;
-import com.tripadviator.serivce.product.request.ProductRequest;
+import com.tripadviator.serivce.ws.product.ProductImportService;
 
 @Controller
+@RequestMapping("/product")
 public class ProductController extends BaseController
 {
 	@Autowired
-	private ProductService productService;
+	private ProductImportService productImportService;
 	
-	@ResponseBody
-	@RequestMapping(value = "/products/{code}", method = RequestMethod.GET)
-	public ProductDetail getProductByCode(@PathVariable("code") String code)
+	@RequestMapping(value = "productHomePage.html")
+	public ModelAndView showProductHomePage()
 	{
-		return productService.getProductDetailByCode(code);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/product/productHomePage");
+		
+		return mv;
 	}
 	
-	/**
-	 *  Try to use GET method but it seems there are too many parameters.
-	 *  Need to find an elegant way to handle this situation.
-	 *  
-	 *  //TODO Refactory
-	 *  
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/products/search", method = RequestMethod.POST, produces="application/json")
-	public List<Product> getProductList(@RequestBody ProductRequest productRequest)
-	{
-		return productService.getProductListByCodes(productRequest.getCodes());
-	}
+	
 }

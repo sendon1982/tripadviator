@@ -14,11 +14,13 @@
 
 	<context:component-scan base-package="com.tripadviator"></context:component-scan>
     <mvc:annotation-driven />
+    
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css/" />
+    <mvc:resources mapping="/images/**" location="/WEB-INF/images/" />
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
-	        <property name="prefix" value="/WEB-INF/view/"/>
-	        <property name="suffix" value=".jsp"/>
+        <property name="prefix" value="/WEB-INF/view/"/>
+        <property name="suffix" value=".jsp"/>
 	</bean>
 
 	<import resource="classpath:/spring/application-config.xml"/>
