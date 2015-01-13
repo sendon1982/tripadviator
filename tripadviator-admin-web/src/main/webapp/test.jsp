@@ -282,7 +282,7 @@
 	<div class="shell">
 		<span class="left">&copy; 2015 - Tripadviator</span>
 		<span class="right">
-			 <a href="#" target="_blank" title="The best travel website">Tripadviator.com</a>
+			Design by <a href="#" target="_blank" title="The best travel website">Tripadviator.com</a>
 		</span>
 	</div>
 </div>
