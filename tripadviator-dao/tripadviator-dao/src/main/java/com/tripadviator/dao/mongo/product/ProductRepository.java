@@ -29,6 +29,16 @@ public interface ProductRepository
 	 */
 	public List<Product> getProductListByCodes(String[] codes);
 	
+	
+	/**
+	 * Search products by various condition, it is like Things To Do page.
+	 * 
+	 * @param productDetail
+	 * @return
+	 */
+	public List<Product> getProductListByProductRequest(ProductDetail productDetail);
+	
+	
 	/**
 	 * Get all of the product code from DB
 	 * 

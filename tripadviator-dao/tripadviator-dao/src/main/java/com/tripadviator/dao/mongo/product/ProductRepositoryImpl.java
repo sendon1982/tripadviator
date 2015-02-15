@@ -119,7 +119,7 @@ public class ProductRepositoryImpl implements ProductRepository
 	
 	
 	/**
-	 * Get product by its code
+	 * Get products by its code
 	 *  
 	 * @param code
 	 * @return
@@ -133,9 +133,25 @@ public class ProductRepositoryImpl implements ProductRepository
 		return mongoTemplate.find(query, Product.class);
 	}
 	
+	/**
+	 * Get product by its condition, such as date range, 
+	 *  
+	 * @param code
+	 * @return
+	 */
+	@Override
+	public List<Product> getProductListByProductRequest(Integer destId, String topX)
+	{
+		Query query = new Query();
+		query.addCriteria(Criteria.where("destId").is(destId));
+		query.addCriteria(Criteria.where("").size(s));
+		
+		return mongoTemplate.find(query, Product.class);
+	}
+	
 
 	/**
-	 * Get all of the product code from DB
+	 * Get all of the product code from DB sorted by ID (Primary Key)
 	 * 
 	 * @return
 	 */
@@ -144,6 +160,7 @@ public class ProductRepositoryImpl implements ProductRepository
 	{
 		Query query = new Query();
 		query.fields().include("code");
+		query.with(new Sort(Sort.Direction.ASC, "_id"));
 		
 		List<Product> productList = mongoTemplate.find(query, Product.class);
 		List<String> productCodeList = new ArrayList<String>();

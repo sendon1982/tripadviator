@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.tripadviator.dao.mongo.product.ProductRepository;
 import com.tripadviator.domain.Product;
 import com.tripadviator.domain.ProductDetail;
+import com.tripadviator.serivce.product.request.ProductRequest;
 
 /**
  * Import product information from Viator API service:
@@ -44,5 +45,11 @@ public class ProductService
 	public List<Product> getProductListByCodes(String[] codes)
 	{
 		return productRepository.getProductListByCodes(codes);
+	}
+
+	public List<Product> getProductListByProductRequest(ProductRequest productRequest) 
+	{
+		
+		return null;
 	}
 }

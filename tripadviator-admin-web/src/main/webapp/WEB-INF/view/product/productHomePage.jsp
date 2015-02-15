@@ -3,7 +3,9 @@
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<title>Free CSS template by ChocoTemplates.com</title>
-	<link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="../css/style.css" type="text/css" media="all" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="../js/product.js"></script>
 </head>
 <body>
 <!-- Header -->
@@ -30,7 +32,7 @@
 			    <li><a href="#"><span>User Home</span></a></li>
 			    <li><a href="#"><span>SEO  Home</span></a></li>
 			    <li><a href="#"><span>Utility Home</span></a></li>
-			    <li><a href="#"><span>Othersl</span></a></li>
+			    <li><a href="#"><span>Others</span></a></li>
 			</ul>
 		</div>
 		<!-- End Main Nav -->
@@ -117,7 +119,7 @@
 								<td><h3><a href="#">Import Product User Review</a></h3></td>
 								<td>2015-11-11 12:12:12</td>
 								<td>2015-11-11 12:12:12</td>
-								<td><a href="#" class="ico del">Start</a><a href="#" class="ico edit">Stop</a></td>
+								<td><a id="productReviewImportId" href="#" class="ico del">Start</a><a href="#" class="ico edit">Stop</a></td>
 							</tr>	
 							
 							<tr>

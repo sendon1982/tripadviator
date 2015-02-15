@@ -40,6 +40,6 @@ public class ProductController extends BaseController
 	@RequestMapping(value = "/products/search", method = RequestMethod.POST, produces="application/json")
 	public List<Product> getProductList(@RequestBody ProductRequest productRequest)
 	{
-		return productService.getProductListByCodes(productRequest.getCodes());
+		return productService.getProductListByProductRequest(productRequest);
 	}
 }
