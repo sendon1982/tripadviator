@@ -9,13 +9,16 @@ import org.springframework.stereotype.Service;
 
 import com.tripadviator.domain.Product;
 import com.tripadviator.domain.ProductDetail;
+import com.tripadviator.domain.user.UserPhoto;
 import com.tripadviator.domain.user.UserReview;
 import com.tripadviator.serivce.product.request.ProductDetailRequest;
 import com.tripadviator.serivce.product.request.ProductRequest;
 import com.tripadviator.serivce.product.response.ProductDetailResponse;
 import com.tripadviator.serivce.product.response.ProductResponse;
 import com.tripadviator.serivce.rest.RestClient;
+import com.tripadviator.serivce.user.request.UserPhotoRequest;
 import com.tripadviator.serivce.user.request.UserReviewRequest;
+import com.tripadviator.serivce.user.response.UserPhotoResponse;
 import com.tripadviator.serivce.user.response.UserReviewResponse;
 
 /**
@@ -78,6 +81,23 @@ public class ProductImportService
 		requestMap.put("sortOrder", request.getSortOrder());
 		
 		UserReviewResponse response = restClient.getRequest(url, requestMap, UserReviewResponse.class);
+		return response.getData();
+	}
+	
+	/**
+	 * Get user photo for the product by product code
+	 * 
+	 * @param url
+	 * @param request
+	 * @return
+	 */
+	public List<UserPhoto> getProductUserPhotoList(String url, UserPhotoRequest request)
+	{
+		Map<String, String> requestMap = new LinkedHashMap<String, String>();
+		requestMap.put("code", request.getCode());
+		requestMap.put("topX", request.getTopX());
+		
+		UserPhotoResponse response = restClient.getRequest(url, requestMap, UserPhotoResponse.class);
 		return response.getData();
 	}
 }

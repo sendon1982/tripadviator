@@ -2,9 +2,6 @@ package com.tripadviator.dao.mongo.product;
 
 import java.util.List;
 
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-
 import com.tripadviator.domain.AbstractEntity;
 import com.tripadviator.domain.Product;
 import com.tripadviator.domain.ProductDetail;
@@ -36,7 +33,7 @@ public interface ProductRepository
 	 * @param productDetail
 	 * @return
 	 */
-	public List<Product> getProductListByProductRequest(ProductDetail productDetail);
+	public List<Product> getProductListByProductRequest(Integer destId, String topX);
 	
 	
 	/**

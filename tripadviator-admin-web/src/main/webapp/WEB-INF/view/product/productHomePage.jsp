@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<title>Free CSS template by ChocoTemplates.com</title>
+	<title>TripAdviator</title>
 	<link rel="stylesheet" href="../css/style.css" type="text/css" media="all" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="../js/product.js"></script>
@@ -127,7 +127,7 @@
 								<td><h3><a href="#">Import Product User Photo</a></h3></td>
 								<td>2015-11-11 12:12:12</td>
 								<td>2015-11-11 12:12:12</td>
-								<td><a href="#" class="ico del">Start</a><a href="#" class="ico edit">Stop</a></td>
+								<td><a id="productPhotoImportId" href="#" class="ico del">Start</a><a href="#" class="ico edit">Stop</a></td>
 							</tr>	
 							
 																					<tr>

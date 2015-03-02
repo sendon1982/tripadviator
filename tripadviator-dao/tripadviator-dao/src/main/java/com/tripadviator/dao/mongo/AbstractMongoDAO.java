@@ -41,15 +41,15 @@ public class AbstractMongoDAO implements DAO
 	 * @param topX
 	 * @return
 	 */
-	public Long getSizeFromTopX(String topX)
+	public Integer getSizeFromTopX(String topX)
 	{
 		String[] arrayTopX = topX.split(DASH);
-		Long startIndex = Long.parseLong(arrayTopX[0]);
-		Long endIndex = Long.parseLong(arrayTopX[1]);
+		Integer startIndex = Integer.parseInt(arrayTopX[0]);
+		Integer endIndex = Integer.parseInt(arrayTopX[1]);
 		
 		log.info(String.format("Parsing topX [%s] into startIndex [%s] and endIndex [%s]", topX, startIndex, endIndex));
 
-		long result = endIndex - startIndex + 1;
+		Integer result = endIndex - startIndex + 1;
 		
 		log.info(String.format("Size from topX [%s] is [%s]", topX, result));
 		

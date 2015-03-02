@@ -13,12 +13,13 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.tripadviator.dao.mongo.AbstractMongoDAO;
 import com.tripadviator.domain.AbstractEntity;
 import com.tripadviator.domain.Product;
 import com.tripadviator.domain.ProductDetail;
 
 @Repository("productRepository")
-public class ProductRepositoryImpl implements ProductRepository
+public class ProductRepositoryImpl extends AbstractMongoDAO implements ProductRepository
 {
 	@Autowired
 	private MongoTemplate mongoTemplate;
@@ -144,7 +145,7 @@ public class ProductRepositoryImpl implements ProductRepository
 	{
 		Query query = new Query();
 		query.addCriteria(Criteria.where("destId").is(destId));
-		query.addCriteria(Criteria.where("").size(s));
+		query.addCriteria(Criteria.where("").size(getSizeFromTopX(topX)));
 		
 		return mongoTemplate.find(query, Product.class);
 	}
