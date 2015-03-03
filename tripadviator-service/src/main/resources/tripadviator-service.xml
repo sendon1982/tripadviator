@@ -35,7 +35,7 @@
 	<bean id="requestFactory" class="org.springframework.http.client.SimpleClientHttpRequestFactory"> 
 	</bean>
 
-	<bean id="restTemplate" name="restTemplate" class="org.springframework.web.client.RestTemplate" autowire-candidate="true">
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate" autowire-candidate="true">
 		<property name="requestFactory" ref="requestFactory"></property>
 
 		<property name="messageConverters">
@@ -46,5 +46,12 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- =================================================================== -->
+    <!-- Security class from Spring Security - used to configure Password    -->
+    <!-- Encryption in UserServiceImpl. It can be overrided in security.xml. -->
+    <!-- =================================================================== -->
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>	
+
 </beans>
 

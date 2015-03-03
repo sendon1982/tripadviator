@@ -2,10 +2,14 @@ package com.tripadviator.domain.user;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.tripadviator.domain.AbstractEntity;
+
+@Document(collection = "product_user_video")
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class UserVideo implements Serializable
+public class UserVideo extends AbstractEntity implements Serializable
 {
 	/**
 	 * serialVersionUID

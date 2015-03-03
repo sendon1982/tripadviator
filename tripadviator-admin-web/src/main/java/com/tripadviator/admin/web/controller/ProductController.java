@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tripadviator.dao.mongo.product.ProductRepository;
 import com.tripadviator.domain.user.UserPhoto;
 import com.tripadviator.domain.user.UserReview;
+import com.tripadviator.domain.user.UserVideo;
 import com.tripadviator.serivce.user.request.UserPhotoRequest;
 import com.tripadviator.serivce.user.request.UserReviewRequest;
 import com.tripadviator.serivce.ws.product.ProductImportService;
@@ -49,6 +50,7 @@ public class ProductController extends BaseController
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("static-access")
 	@RequestMapping(value = "importProductReview.html")
 	@ResponseBody
 	public String importProductReview()
@@ -110,6 +112,7 @@ public class ProductController extends BaseController
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("static-access")
 	@RequestMapping(value = "importProductPhoto.html")
 	@ResponseBody
 	public String importProductPhoto()
@@ -155,6 +158,67 @@ public class ProductController extends BaseController
 			for (UserPhoto userPhoto : photos) 
 			{
 				productRepository.save(userPhoto);
+			}
+		}
+
+		return SUCCESS;
+	}
+	
+	// --------------------------------------------------------------------------------------------
+	// Product Photo Section
+	// --------------------------------------------------------------------------------------------
+	
+	/**
+	 * Import Product Review into Mongo DB from Viator API service.
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("static-access")
+	@RequestMapping(value = "importProductVideo.html")
+	@ResponseBody
+	public String importProductVideo()
+	{
+		String url = "http://viatorapi.viator.com/service/product/videos";
+		
+		List<String> allProductCode = productRepository.getAllProductCode();
+		
+		log.info(String.format("Total product from repository is [%s]", allProductCode.size()));
+		
+		for (String code : allProductCode) 
+		{
+			UserPhotoRequest request = new UserPhotoRequest();
+			request.setCode(code);
+			request.setTopX("1-5000");
+			
+			List<UserVideo> videos = null;
+			
+			try
+			{
+				videos = productImportService.getProductUseVideoList(url, request);
+			}
+			catch(Exception e)
+			{
+				System.out.println("Failed for product : " + code);
+				System.out.println(e);
+				
+				// Try again
+				try
+				{
+					Thread.currentThread().sleep(3000);
+					videos = productImportService.getProductUseVideoList(url, request);
+				}
+				catch(Exception ex)
+				{
+					System.out.println("Failed for product : " + code);
+					System.out.println(ex);
+					videos = Collections.emptyList();
+				}
+				
+			}
+			
+			for (UserVideo userVideo : videos) 
+			{
+				productRepository.save(userVideo);
 			}
 		}
 

@@ -11,6 +11,7 @@ import com.tripadviator.domain.Product;
 import com.tripadviator.domain.ProductDetail;
 import com.tripadviator.domain.user.UserPhoto;
 import com.tripadviator.domain.user.UserReview;
+import com.tripadviator.domain.user.UserVideo;
 import com.tripadviator.serivce.product.request.ProductDetailRequest;
 import com.tripadviator.serivce.product.request.ProductRequest;
 import com.tripadviator.serivce.product.response.ProductDetailResponse;
@@ -20,6 +21,7 @@ import com.tripadviator.serivce.user.request.UserPhotoRequest;
 import com.tripadviator.serivce.user.request.UserReviewRequest;
 import com.tripadviator.serivce.user.response.UserPhotoResponse;
 import com.tripadviator.serivce.user.response.UserReviewResponse;
+import com.tripadviator.serivce.user.response.UserVideoResponse;
 
 /**
  * Import product information from Viator API service:
@@ -98,6 +100,23 @@ public class ProductImportService
 		requestMap.put("topX", request.getTopX());
 		
 		UserPhotoResponse response = restClient.getRequest(url, requestMap, UserPhotoResponse.class);
+		return response.getData();
+	}
+	
+	/**
+	 * Get user photo for the product by product code
+	 * 
+	 * @param url
+	 * @param request
+	 * @return
+	 */
+	public List<UserVideo> getProductUseVideoList(String url, UserPhotoRequest request)
+	{
+		Map<String, String> requestMap = new LinkedHashMap<String, String>();
+		requestMap.put("code", request.getCode());
+		requestMap.put("topX", request.getTopX());
+		
+		UserVideoResponse response = restClient.getRequest(url, requestMap, UserVideoResponse.class);
 		return response.getData();
 	}
 }

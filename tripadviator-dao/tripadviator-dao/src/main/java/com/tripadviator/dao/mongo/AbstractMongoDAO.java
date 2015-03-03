@@ -2,6 +2,8 @@ package com.tripadviator.dao.mongo;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.tripadviator.dao.DAO;
 
@@ -10,6 +12,17 @@ public class AbstractMongoDAO implements DAO
 	private static final Log log = LogFactory.getLog(AbstractMongoDAO.class);
 	
 	private static final String DASH = "-";
+	
+	@Autowired
+	private MongoTemplate mongoTemplate;
+
+	public MongoTemplate getMongoTemplate() {
+		return mongoTemplate;
+	}
+
+	public void setMongoTemplate(MongoTemplate mongoTemplate) {
+		this.mongoTemplate = mongoTemplate;
+	}
 
 	@Override
 	public <T> T queryForObject(T t) {

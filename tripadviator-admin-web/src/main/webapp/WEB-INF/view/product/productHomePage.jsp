@@ -135,7 +135,7 @@
 								<td><h3><a href="#">Import Product User Video</a></h3></td>
 								<td>2015-11-11 12:12:12</td>
 								<td>2015-11-11 12:12:12</td>
-								<td><a href="#" class="ico del">Start</a><a href="#" class="ico edit">Stop</a></td>
+								<td><a id="productVideoImportId" href="#" class="ico del">Start</a><a href="#" class="ico edit">Stop</a></td>
 							</tr>	
 															
 						</table>

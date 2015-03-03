@@ -21,10 +21,6 @@ import com.tripadviator.domain.ProductDetail;
 @Repository("productRepository")
 public class ProductRepositoryImpl extends AbstractMongoDAO implements ProductRepository
 {
-	@Autowired
-	private MongoTemplate mongoTemplate;
-
-	
 	public List<Product> findAll() {
 		// TODO Auto-generated method stub
 		return null;
@@ -99,7 +95,7 @@ public class ProductRepositoryImpl extends AbstractMongoDAO implements ProductRe
 	
 	public <S extends AbstractEntity> S save(S s) 
 	{
-		mongoTemplate.save(s);
+		getMongoTemplate().save(s);
 		return null;
 	}
 	
@@ -115,7 +111,7 @@ public class ProductRepositoryImpl extends AbstractMongoDAO implements ProductRe
 		Query query = new Query();
 		query.addCriteria(Criteria.where("code").is(code));
 		
-		return mongoTemplate.findOne(query, ProductDetail.class);
+		return getMongoTemplate().findOne(query, ProductDetail.class);
 	}
 	
 	
@@ -131,7 +127,7 @@ public class ProductRepositoryImpl extends AbstractMongoDAO implements ProductRe
 		Query query = new Query();
 		query.addCriteria(Criteria.where("code").in(Arrays.asList(codes)));
 		
-		return mongoTemplate.find(query, Product.class);
+		return getMongoTemplate().find(query, Product.class);
 	}
 	
 	/**
@@ -147,7 +143,7 @@ public class ProductRepositoryImpl extends AbstractMongoDAO implements ProductRe
 		query.addCriteria(Criteria.where("destId").is(destId));
 		query.addCriteria(Criteria.where("").size(getSizeFromTopX(topX)));
 		
-		return mongoTemplate.find(query, Product.class);
+		return getMongoTemplate().find(query, Product.class);
 	}
 	
 
@@ -163,7 +159,7 @@ public class ProductRepositoryImpl extends AbstractMongoDAO implements ProductRe
 		query.fields().include("code");
 		query.with(new Sort(Sort.Direction.ASC, "_id"));
 		
-		List<Product> productList = mongoTemplate.find(query, Product.class);
+		List<Product> productList = getMongoTemplate().find(query, Product.class);
 		List<String> productCodeList = new ArrayList<String>();
 		
 		for (Product product : productList) 
