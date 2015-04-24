@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:tripadviator-service-test.xml")
-public class BaseTestCase extends TestCase
+public abstract class BaseTestCase extends TestCase
 {
 	
 }

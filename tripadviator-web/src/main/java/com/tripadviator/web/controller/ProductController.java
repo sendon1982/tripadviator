@@ -3,6 +3,7 @@ package com.tripadviator.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,7 +38,7 @@ public class ProductController extends BaseController
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/products/search", method = RequestMethod.POST, produces="application/json")
+	@RequestMapping(value = "/products/search", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Product> getProductList(@RequestBody ProductRequest productRequest)
 	{
 		return productService.getProductListByProductRequest(productRequest);
