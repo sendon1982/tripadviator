@@ -150,6 +150,20 @@
 			<artifactId>mockito-all</artifactId>
 			<version>${mockito.version}</version>
 		</dependency>
+		
+		<!-- We use JsonPath when we are writing assertions for JSON documents returned by our REST API -->
+		<dependency>
+		    <groupId>com.jayway.jsonpath</groupId>
+		    <artifactId>json-path</artifactId>
+		    <version>0.8.1</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+	    	<groupId>com.jayway.jsonpath</groupId>
+		    <artifactId>json-path-assert</artifactId>
+	    	<version>0.8.1</version>
+	    	<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 	
