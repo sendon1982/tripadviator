@@ -23,7 +23,9 @@ public class ProductController extends BaseController
 	private ProductService productService;
 	
 	@ResponseBody
-	@RequestMapping(value = "/products/{code}", method = RequestMethod.GET)
+	@RequestMapping(value = "/products/{code}", method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			headers = {"content-type=application/json"})
 	public ProductDetail getProductByCode(@PathVariable("code") String code)
 	{
 		return productService.getProductDetailByCode(code);
@@ -38,7 +40,7 @@ public class ProductController extends BaseController
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/products/search", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/products/search", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Product> getProductList(@RequestBody ProductRequest productRequest)
 	{
 		return productService.getProductListByProductRequest(productRequest);
