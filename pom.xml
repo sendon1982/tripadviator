@@ -16,6 +16,12 @@
 	    <module>tripadviator-domain</module>
 	</modules>
 	
+	<repositories>
+		<repository>
+      		<id>maven-office-website</id>
+      		<url>http://repo1.maven.org/maven2/</url>		
+		</repository>
+	</repositories>
 	
 	<properties>
 
@@ -55,23 +61,6 @@
 		</dependency>
 
 		<!-- Other Web dependencies -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>${jstl.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>${servlet.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>${jsp.version}</version>
-			<scope>provided</scope>
-		</dependency>
 
 		<!-- Spring and Transactions -->
 		<dependency>
