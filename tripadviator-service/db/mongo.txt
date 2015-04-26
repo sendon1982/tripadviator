@@ -50,6 +50,12 @@ mongoimport --db tripadviator --collection product --file D:/product.json
 
 mongoexport --db tripadviator --collection product --out D:/product.json
 
+mongoexport --db tripadviator --collection product_user_photo --out D:/product_user_photo.json
+
+mongoexport --db tripadviator --collection product_user_review --out D:/product_user_review.json
+
+mongoexport --db tripadviator --collection product_user_video --out D:/product_user_video.json
+
 mongoexport --db tripadviator --collection product_detail --out D:/product_detail.json
 
 
