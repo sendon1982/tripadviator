@@ -81,7 +81,7 @@
 
 		    postBlank = true;
 		    if(postBlank) { 
-		        widown.open(dataUrl);
+		        
 		    } else { 
 		        parent.results.location.href=dataUrl; 
 		    }  

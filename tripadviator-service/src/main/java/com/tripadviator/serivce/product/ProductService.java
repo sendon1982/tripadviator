@@ -47,9 +47,11 @@ public class ProductService
 		return productRepository.getProductListByCodes(codes);
 	}
 
-	public List<Product> getProductListByProductRequest(ProductRequest productRequest) 
+	public List<ProductDetail> getProductListByProductRequest(ProductRequest productRequest) 
 	{
 		
-		return null;
+		return productRepository.getProductListByProductRequest(productRequest.getStartDate(), 
+				productRequest.getEndDate(), productRequest.getTopX(), productRequest.getDestId(), productRequest.getCurrencyCode(),
+				productRequest.getCatId(), productRequest.getSubCatId(), productRequest.isDealsOnly());
 	}
 }

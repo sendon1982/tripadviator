@@ -135,13 +135,38 @@ public class ProductRepositoryImpl extends AbstractMongoDAO implements ProductRe
 	 * @return
 	 */
 	@Override
-	public List<Product> getProductListByProductRequest(Integer destId, String topX)
+	public List<ProductDetail> getProductListByProductRequest(String startDate, String endDate, 
+			String topX, Integer destId, String currencyCode,
+			Integer catId, Integer subCatId, boolean dealsOnly)
 	{
 		Query query = new Query();
-		query.addCriteria(Criteria.where("destId").is(destId));
-		query.addCriteria(Criteria.where("").size(getSizeFromTopX(topX)));
+//		query.addCriteria(Criteria.where("startDate").lte(startDate));
+//		query.addCriteria(Criteria.where("endDate").lte(endDate));
+		query.addCriteria(Criteria.where("currencyCode").is(currencyCode));
 		
-		return getMongoTemplate().find(query, Product.class);
+		if(catId == null || catId == 0)
+		{
+			// null
+		}
+		else
+		{
+			query.addCriteria(Criteria.where("catId").is(catId));
+		}
+		
+		if(subCatId == null || subCatId == 0)
+		{
+			// null
+		}
+		else
+		{
+			query.addCriteria(Criteria.where("subCatId").is(subCatId));
+		}
+		
+//		query.addCriteria(Criteria.where("dealsOnly").is(dealsOnly));
+		query.addCriteria(Criteria.where("destinationId").is(destId));
+//		query.addCriteria(Criteria.where("").size(getSizeFromTopX(topX)));
+		
+		return getMongoTemplate().find(query, ProductDetail.class);
 	}
 	
 

@@ -1,3 +1,4 @@
 com\tripadviator\web\controller\BaseController.class
-com\tripadviator\web\controller\ProductController.class
+com\tripadviator\web\constant\WebConstant.class
 com\tripadviator\web\util\TestUtil.class
+com\tripadviator\web\controller\ProductController.class

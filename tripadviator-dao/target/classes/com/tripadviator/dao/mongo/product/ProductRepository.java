@@ -33,7 +33,9 @@ public interface ProductRepository
 	 * @param productDetail
 	 * @return
 	 */
-	public List<Product> getProductListByProductRequest(Integer destId, String topX);
+	public List<ProductDetail> getProductListByProductRequest(String startDate, String endDate, 
+			String topX, Integer destId, String currencyCode,
+			Integer catId, Integer subCatId, boolean dealsOnly);
 	
 	
 	/**

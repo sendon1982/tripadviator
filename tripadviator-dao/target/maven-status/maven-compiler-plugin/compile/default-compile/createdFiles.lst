@@ -1,0 +1,8 @@
+com\tripadviator\dao\DAO.class
+com\tripadviator\dao\mongo\AbstractMongoDAO.class
+com\tripadviator\dao\App.class
+com\tripadviator\dao\mongo\BaseDAO.class
+com\tripadviator\dao\mongo\product\ProductRepository.class
+com\tripadviator\dao\mongo\user\UserRepositoryImpl.class
+com\tripadviator\dao\mongo\user\UserRepository.class
+com\tripadviator\dao\mongo\product\ProductRepositoryImpl.class
