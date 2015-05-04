@@ -1,4 +1,0 @@
-com\tripadviator\AppTest.class
-com\tripadviator\dao\mongo\product\ProductRepositoryImplTest.class
-com\tripadviator\service\base\BaseTestCase.class
-com\tripadviator\serivce\product\ProductImportServiceTestCase.class
