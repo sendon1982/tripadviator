@@ -41,6 +41,7 @@ public class ProductController extends BaseController
 	@RequestMapping(value = "/products/search", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ProductDetail> getProductList(@RequestBody ProductRequest productRequest)
 	{
-		return productService.getProductListByProductRequest(productRequest);
+		List<ProductDetail> productListByProductRequest = productService.getProductListByProductRequest(productRequest);
+		return productListByProductRequest;
 	}
 }
