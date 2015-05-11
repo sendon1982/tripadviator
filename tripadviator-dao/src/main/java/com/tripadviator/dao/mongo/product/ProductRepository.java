@@ -5,9 +5,22 @@ import java.util.List;
 import com.tripadviator.domain.AbstractEntity;
 import com.tripadviator.domain.Product;
 import com.tripadviator.domain.ProductDetail;
+import com.tripadviator.domain.user.UserReview;
 
+/**
+ * Product Repository is for product related operations, such as search, update, delete.
+ * Also include product reviews, product photos, product videos.
+ * 
+ * @author Ming
+ *
+ */
 public interface ProductRepository
 {
+	
+	//*********************************************************************************************************************
+	// Product Information
+	//*********************************************************************************************************************
+	
 	public <S extends AbstractEntity> S save(S s);
 	
 	/**
@@ -44,4 +57,33 @@ public interface ProductRepository
 	 * @return
 	 */
 	public List<String> getAllProductCode();
+	
+	
+	
+	//*********************************************************************************************************************
+	// Product Review
+	//*********************************************************************************************************************
+	
+	public List<UserReview> getReviewListByProductCode(String productCode);
+	
+	
+	public List<UserReview> getReviewListByUserId(Long userId);
+	
+	
+	public UserReview getReviewById(String id);
+	
+	
+	//*********************************************************************************************************************
+	// Product Photo
+	//*********************************************************************************************************************
+	
+	
+	
+	
+	//*********************************************************************************************************************
+	// Product Review
+	//*********************************************************************************************************************
+	
+	
+	
 }

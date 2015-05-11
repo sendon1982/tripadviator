@@ -44,4 +44,18 @@ public class ProductController extends BaseController
 		List<ProductDetail> productListByProductRequest = productService.getProductListByProductRequest(productRequest);
 		return productListByProductRequest;
 	}
+	
+	/**
+	 * Get a list of reviews for a certain product based on the productCode
+	 * 
+	 * @param productRequest
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/products/{code}/reviews", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<ProductDetail> getProductReviews(@RequestBody ProductRequest productRequest)
+	{
+		List<ProductDetail> productListByProductRequest = productService.getProductListByProductRequest(productRequest);
+		return productListByProductRequest;
+	}
 }

@@ -4,18 +4,16 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.tripadviator.dao.base.BaseRepositoryTestCase;
 import com.tripadviator.domain.ProductDetail;
+import com.tripadviator.domain.user.UserReview;
 
-public class ProductRepositoryImplTest 
+public class ProductRepositoryImplTest extends BaseRepositoryTestCase
 {	
 	@Test
 	public void testSearchProducts() 
 	{
-		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:tripadviator-service.xml");
-		ProductRepository productRepositoryImpl = ctx.getBean(ProductRepositoryImpl.class);
-		
 		String startDate = "2014-01-01";
 		String endDate = "2016-01-01";
 		String topX = "1-15";
@@ -25,11 +23,33 @@ public class ProductRepositoryImplTest
 		Integer subCatId = 0;
 		boolean dealsOnly = false;
 		
-		List<ProductDetail> list = productRepositoryImpl.getProductListByProductRequest(startDate, endDate, topX, destId, currencyCode, catId, subCatId, dealsOnly);
+		List<ProductDetail> list = productRepository.getProductListByProductRequest(startDate, endDate, topX, destId, currencyCode, catId, subCatId, dealsOnly);
 		
 		Assert.assertEquals(13, list.size());
+	}
+	
+	@Test
+	public void testGetReviewListByProductCode()
+	{
+		String productCode = "3378HIGH";
+
+		List<UserReview> list = productRepository.getReviewListByProductCode(productCode);
 		
-		ctx.close();
+		Assert.assertNotNull(list);
+		
+		Assert.assertEquals(productCode, list.get(0).getProductCode());
+	}
+	
+	@Test
+	public void testGetReviewListByUserId()
+	{
+		Long userId = 5642953L;
+		
+		List<UserReview> list = productRepository.getReviewListByUserId(userId);
+		
+		Assert.assertNotNull(list);
+		
+		Assert.assertEquals(userId, list.get(0).getOwnerId());
 	}
 
 }

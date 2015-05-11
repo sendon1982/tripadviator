@@ -15,6 +15,7 @@ import com.tripadviator.dao.mongo.AbstractMongoDAO;
 import com.tripadviator.domain.AbstractEntity;
 import com.tripadviator.domain.Product;
 import com.tripadviator.domain.ProductDetail;
+import com.tripadviator.domain.user.UserReview;
 
 @Repository("productRepository")
 public class ProductRepositoryImpl extends AbstractMongoDAO implements ProductRepository
@@ -191,5 +192,37 @@ public class ProductRepositoryImpl extends AbstractMongoDAO implements ProductRe
 		}
 		
 		return productCodeList;
+	}
+	
+	
+	//*********************************************************************************************************************
+	// Product Review
+	//*********************************************************************************************************************
+	
+	public List<UserReview> getReviewListByProductCode(String productCode)
+	{
+		Query query = new Query();
+		query.addCriteria(Criteria.where("productCode").is(productCode));
+		
+		List<UserReview> userReviewList = getMongoTemplate().find(query, UserReview.class);
+	
+		return userReviewList;
+	}
+	
+	
+	public List<UserReview> getReviewListByUserId(Long userId)
+	{
+		Query query = new Query();
+		query.addCriteria(Criteria.where("ownerId").is(userId));
+		
+		List<UserReview> userReviewList = getMongoTemplate().find(query, UserReview.class);
+	
+		return userReviewList;
+	}
+	
+	
+	public UserReview getReviewById(String id)
+	{
+		return new UserReview();
 	}
 }
