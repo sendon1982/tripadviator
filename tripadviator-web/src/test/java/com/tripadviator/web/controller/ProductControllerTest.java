@@ -11,7 +11,6 @@ public class ProductControllerTest extends BaseControllerTest
     @Test
     public void testGetProductByCode() throws Exception
     {
-    	mockMvc.perform(get("/products/2280SUN").contentType(MediaType.APPLICATION_JSON)).
-    		andExpect(status().isOk());
+    	mockMvc.perform(get("/products/2280SUN").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
     }
 }
